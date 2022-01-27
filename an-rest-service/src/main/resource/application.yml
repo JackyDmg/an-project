@@ -1,0 +1,12 @@
+spring :
+  application :
+    name : an-rest-service
+
+ariadnext:
+  idcheckio:
+    client:
+      username : 
+      password : 
+
+
+
