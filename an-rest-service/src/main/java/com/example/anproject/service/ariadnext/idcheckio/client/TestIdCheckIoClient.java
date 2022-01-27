@@ -16,8 +16,8 @@ import com.example.anproject.service.ariadnext.idcheckio.dto.UserResponse;
 /**
  * The IdCheckIo Client interface
  */
-@FeignClient(value = "idcheckio", url = AriadNextConstant.URL_SANDBOX, configuration = IdCheckIoConfiguration.class)
-public interface IdCheckIoClient {
+@FeignClient(value = "test-idcheckio", url = AriadNextConstant.URL_TEST, configuration = IdCheckIoConfiguration.class)
+public interface TestIdCheckIoClient {
 
 	/**
 	 * Gets the user information.

@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.anproject.service.ariadnext.idcheckio.IdCheckService;
 import com.example.anproject.service.ariadnext.idcheckio.dto.AnalysisResult;
-import com.example.anproject.service.ariadnext.idcheckio.dto.Image;
-import com.example.anproject.service.ariadnext.idcheckio.dto.ImagesList;
 import com.example.anproject.service.user.UserService;
 import com.example.anproject.service.user.bo.UserId;
 import com.example.anproject.service.user.mapper.UserIdMapper;
@@ -39,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		Integer credits = idCheckService.getUserRemainingCredits();
 		log.info("Remaining credits : {}", credits);
 
-		AnalysisResult analysis = idCheckService.analyseImage(false, getDemoImage());
+		AnalysisResult analysis = idCheckService.analyseImage(false, idImage);
 
 		UserId userId = userIdMapper.userAnalyseToUserId(analysis);
 
@@ -57,16 +55,4 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
-	/**
-	 * Gets a demo image.
-	 *
-	 * @return the demo image
-	 */
-	private String getDemoImage() {
-		ImagesList imagesList = idCheckService.getImagesList();
-		Image imageId = imagesList.getImages().get(4);
-		log.info("List of Images available for test : {}", imageId);
-
-		return idCheckService.getImage(imageId.getDoc(), imageId.getRawType(), imageId.getFace(), imageId.getLight());
-	}
 }

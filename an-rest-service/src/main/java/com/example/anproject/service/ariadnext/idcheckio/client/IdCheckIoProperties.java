@@ -15,4 +15,5 @@ public class IdCheckIoProperties {
 
 	private String username;
 	private String password;
+	private String plateform;
 }
