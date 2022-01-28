@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.anproject.service.ariadnext.idcheckio.IdCheckService;
-import com.example.anproject.service.ariadnext.idcheckio.dto.AnalysisResult;
 import com.example.anproject.service.user.UserService;
 import com.example.anproject.service.user.bo.UserId;
-import com.example.anproject.service.user.mapper.UserIdMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,9 +20,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private IdCheckService idCheckService;
 
-	@Autowired
-	private UserIdMapper userIdMapper;
-
 	/**
 	 * Validate user id.
 	 *
@@ -37,22 +32,26 @@ public class UserServiceImpl implements UserService {
 		Integer credits = idCheckService.getUserRemainingCredits();
 		log.info("Remaining credits : {}", credits);
 
-		AnalysisResult analysis = idCheckService.analyseImage(false, idImage);
-
-		UserId userId = userIdMapper.userAnalyseToUserId(analysis);
-
-		userId.setIdValid(isIdValid(analysis));
-		return userId;
+		return idCheckService.analyseImage(false, idImage);
 	}
 
 	/**
-	 * Checks if is id valid.
+	 * Validate user subscription.
 	 *
-	 * @return true, if is id valid
+	 * @param userId the user id
+	 * @return true, if successful
 	 */
-	private boolean isIdValid(AnalysisResult analysis) {
-		// TODO Analyse CheckReportSummary content to check if the ID is valid
-		return true;
+	@Override
+	public boolean validateUserSubscription(UserId userId) {
+
+		if (userId.isIdValid()) {
+			// TODO compare userId to the authenticated user information to check if it's
+			// match. If it matches :
+			// - Validate the subscription
+			// - Store User information subscription in database
+			return true;
+		}
+		return false;
 	}
 
 }

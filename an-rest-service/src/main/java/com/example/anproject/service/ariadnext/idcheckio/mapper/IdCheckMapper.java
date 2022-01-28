@@ -1,4 +1,4 @@
-package com.example.anproject.service.user.mapper;
+package com.example.anproject.service.ariadnext.idcheckio.mapper;
 
 import java.time.LocalDate;
 
@@ -11,10 +11,10 @@ import com.example.anproject.service.ariadnext.idcheckio.dto.HolderDetail;
 import com.example.anproject.service.user.bo.UserId;
 
 /**
- * The Class UserIdMapper.
+ * The Class IdCheckMapper.
  */
 @Component
-public class UserIdMapper {
+public class IdCheckMapper {
 
 	/**
 	 * User analyse to user id.

@@ -21,12 +21,19 @@ public class MainController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/checkId")
-	public UserId checkUserId() throws Exception {
+	/**
+	 * Suscribe service.
+	 *
+	 * @return the boolean
+	 * @throws Exception the exception
+	 */
+	@GetMapping("/suscribe")
+	public Boolean suscribeService() throws Exception {
 
 		String encodedString = getLocalImageIdForTest();
 
-		return userService.validateUserId(encodedString);
+		UserId userId = userService.validateUserId(encodedString);
+		return userService.validateUserSubscription(userId);
 	}
 
 	private String getLocalImageIdForTest() throws IOException {

@@ -1,6 +1,6 @@
 package com.example.anproject.service.ariadnext.idcheckio;
 
-import com.example.anproject.service.ariadnext.idcheckio.dto.AnalysisResult;
+import com.example.anproject.service.user.bo.UserId;
 
 /**
  * The Interface IdCheckIoService.
@@ -21,6 +21,6 @@ public interface IdCheckService {
 	 * @param image     the image
 	 * @return the analysis result dto
 	 */
-	AnalysisResult analyseImage(boolean asyncMode, String image);
+	UserId analyseImage(boolean asyncMode, String image);
 
 }

@@ -17,6 +17,8 @@ import com.example.anproject.service.ariadnext.idcheckio.client.TestIdCheckIoCli
 import com.example.anproject.service.ariadnext.idcheckio.dto.AnalysisResult;
 import com.example.anproject.service.ariadnext.idcheckio.dto.ImageAnalysis;
 import com.example.anproject.service.ariadnext.idcheckio.dto.UserResponse;
+import com.example.anproject.service.ariadnext.idcheckio.mapper.IdCheckMapper;
+import com.example.anproject.service.user.bo.UserId;
 
 import feign.FeignException;
 
@@ -28,6 +30,9 @@ public class TestIdCheckServiceImpl implements IdCheckService {
 	/** The id check io client. */
 	@Autowired
 	private TestIdCheckIoClient idCheckIoClient;
+
+	@Autowired
+	private IdCheckMapper userIdMapper;
 
 	/**
 	 * Gets the user remaining credits.
@@ -65,14 +70,19 @@ public class TestIdCheckServiceImpl implements IdCheckService {
 	 * @return the analysis result
 	 */
 	@Override
-	public AnalysisResult analyseImage(boolean asyncMode, String image) {
+	public UserId analyseImage(boolean asyncMode, String image) {
 		try {
 
 			ImageAnalysis imageAnalysisDto = new ImageAnalysis();
 			imageAnalysisDto.setFrontImage(image);
 
 			// TODO : Manage async mode
-			return idCheckIoClient.analyseImage(asyncMode, imageAnalysisDto);
+			AnalysisResult analysis = idCheckIoClient.analyseImage(asyncMode, imageAnalysisDto);
+
+			UserId userId = userIdMapper.userAnalyseToUserId(analysis);
+			userId.setIdValid(isIdValid(analysis));
+
+			return userId;
 
 		} catch (FeignException e) {
 			switch (e.status()) {
@@ -90,4 +100,13 @@ public class TestIdCheckServiceImpl implements IdCheckService {
 		}
 	}
 
+	/**
+	 * Checks if is id valid.
+	 *
+	 * @return true, if is id valid
+	 */
+	private boolean isIdValid(AnalysisResult analysis) {
+		// TODO Analyse CheckReportSummary content to check if the ID is valid
+		return true;
+	}
 }

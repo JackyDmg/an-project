@@ -15,4 +15,12 @@ public interface UserService {
 	 */
 	UserId validateUserId(String idImage);
 
+	/**
+	 * Validate user subscription.
+	 *
+	 * @param userId the user id
+	 * @return true, if successful
+	 */
+	boolean validateUserSubscription(UserId userId);
+
 }
