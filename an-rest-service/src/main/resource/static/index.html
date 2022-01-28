@@ -27,7 +27,6 @@
 		<br />
 		<div>
 			<button onClick="subscribe()" class="btn btn-primary">Subscribe</button>
-			<span id="subscribeRes"></span>
 		</div>
 		<br />
 		<div>
@@ -65,7 +64,6 @@
 		}
 		var subscribe = function (data) {
 			$.post("/subscribe", function () {
-				$("#subscribeRes").html(result);
 			})
 			return true;
 		}

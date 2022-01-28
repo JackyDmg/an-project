@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.anproject.service.user.UserService;
 import com.example.anproject.service.user.bo.UserId;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/")
+@Slf4j
 public class MainController {
 
 	/** The idCheckIo service. */
@@ -37,7 +40,7 @@ public class MainController {
 	 * @throws Exception the exception
 	 */
 	@PostMapping("/subscribe")
-	public String suscribeService(@AuthenticationPrincipal OAuth2User principal) {
+	public boolean suscribeService(@AuthenticationPrincipal OAuth2User principal) {
 
 		try {
 			String image = getLocalImageIdForTest();
@@ -45,15 +48,18 @@ public class MainController {
 
 			String userName = principal.getAttribute("name");
 			if (userService.validateUserSubscription(userName, userId)) {
-				return "Hi, " + userId.getFirstName() + " " + userId.getLastName()
+				String msg = "Hi, " + userId.getFirstName() + " " + userId.getLastName()
 						+ ", your subscription has been granted !";
+				log.info(msg);
+				return true;
 			}
 
 		} catch (Exception e) {
-			return "Subscription refused because of " + e.getMessage();
+			String msg = "Subscription refused because of " + e.getMessage();
+			log.error(msg);
 		}
 
-		return "";
+		return false;
 	}
 
 	private String getLocalImageIdForTest() throws IOException {
