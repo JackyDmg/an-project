@@ -137,16 +137,6 @@ public class SandBoxIdCheckServiceImpl implements IdCheckService {
 	 * @return true, if is id valid
 	 */
 	private boolean isIdValid(AnalysisResult analysis) {
-		// TODO Analyse CheckReportSummary content to check if the ID is valid
-
-		analysis.getCheckReportSummary().getCheck().stream().forEach(verif -> {
-			if (!verif.getResult().equals("OK")) {
-				log.warn("Id not valid - cause {}", verif.getResultMsg());
-				throw new BadRequestException(verif.getResultMsg());
-			}
-
-		});
-
 		return true;
 	}
 
