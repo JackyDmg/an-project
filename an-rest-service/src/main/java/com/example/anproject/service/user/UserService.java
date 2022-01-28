@@ -10,17 +10,18 @@ public interface UserService {
 	/**
 	 * Validate user id.
 	 *
-	 * @param idImage the id image
+	 * @param image the image
 	 * @return the UserId result
 	 */
-	UserId validateUserId(String idImage);
+	UserId validateUserId(String image);
 
 	/**
 	 * Validate user subscription.
 	 *
-	 * @param userId the user id
+	 * @param userName the user name
+	 * @param userId   the user id
 	 * @return true, if successful
 	 */
-	boolean validateUserSubscription(UserId userId);
+	boolean validateUserSubscription(String userName, UserId userId);
 
 }

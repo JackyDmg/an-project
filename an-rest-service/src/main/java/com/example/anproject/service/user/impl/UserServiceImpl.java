@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.anproject.service.ariadnext.idcheckio.IdCheckService;
+import com.example.anproject.service.exception.BadRequestException;
 import com.example.anproject.service.user.UserService;
 import com.example.anproject.service.user.bo.UserId;
 
@@ -23,35 +24,51 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * Validate user id.
 	 *
-	 * @param idImage the id image
+	 * @param image the image
 	 * @return the analysis result
 	 */
 	@Override
-	public UserId validateUserId(String idImage) {
+	public UserId validateUserId(String image) {
 
 		Integer credits = idCheckService.getUserRemainingCredits();
 		log.info("Remaining credits : {}", credits);
 
-		return idCheckService.analyseImage(false, idImage);
+		return idCheckService.analyseImage(false, image);
 	}
 
 	/**
 	 * Validate user subscription.
 	 *
-	 * @param userId the user id
+	 * @param userName the user name
+	 * @param userId   the user id
 	 * @return true, if successful
 	 */
 	@Override
-	public boolean validateUserSubscription(UserId userId) {
+	public boolean validateUserSubscription(String userName, UserId userId) {
 
-		if (userId.isIdValid()) {
+		if (userId.isIdValid() && idMatchUserName(userName, userId)) {
 			// TODO compare userId to the authenticated user information to check if it's
 			// match. If it matches :
 			// - Validate the subscription
 			// - Store User information subscription in database
 			return true;
 		}
-		return false;
+		throw new BadRequestException(
+				"Le nom d'utilisateur [" + userName + "] ne correspond pas à la carte d'identité !");
+	}
+
+	/**
+	 * Id match user name.
+	 *
+	 * @param userName the user name
+	 * @param userId   the user id
+	 * @return true, if successful
+	 */
+	private boolean idMatchUserName(String userName, UserId userId) {
+
+		// Compare userName with userId ( !! userName from social network are not always
+		// the real one !!
+		return true;
 	}
 
 }

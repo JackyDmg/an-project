@@ -3,10 +3,14 @@ package com.example.anproject.rest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Collections;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,19 +25,26 @@ public class MainController {
 	@Autowired
 	private UserService userService;
 
+	@RequestMapping("/user")
+	public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
+		return Collections.singletonMap("name", principal.getAttribute("name"));
+	}
+
 	/**
 	 * Suscribe service.
 	 *
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
-	@GetMapping("/suscribe")
-	public String suscribeService() {
+	@PostMapping("/subscribe")
+	public String suscribeService(@AuthenticationPrincipal OAuth2User principal) {
 
 		try {
-			String encodedString = getLocalImageIdForTest();
-			UserId userId = userService.validateUserId(encodedString);
-			if (userService.validateUserSubscription(userId)) {
+			String image = getLocalImageIdForTest();
+			UserId userId = userService.validateUserId(image);
+
+			String userName = principal.getAttribute("name");
+			if (userService.validateUserSubscription(userName, userId)) {
 				return "Hi, " + userId.getFirstName() + " " + userId.getLastName()
 						+ ", your subscription has been granted !";
 			}
