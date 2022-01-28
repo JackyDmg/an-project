@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.anproject.service.ariadnext.idcheckio.IdCheckService;
 import com.example.anproject.service.exception.BadRequestException;
+import com.example.anproject.service.exception.NotAllowedException;
 import com.example.anproject.service.user.UserService;
 import com.example.anproject.service.user.bo.UserId;
 
@@ -32,8 +33,10 @@ public class UserServiceImpl implements UserService {
 
 		Integer credits = idCheckService.getUserRemainingCredits();
 		log.info("Remaining credits : {}", credits);
+		if (credits > 0)
+			return idCheckService.analyseImage(false, image);
 
-		return idCheckService.analyseImage(false, image);
+		throw new NotAllowedException("Not enough crdits !");
 	}
 
 	/**
