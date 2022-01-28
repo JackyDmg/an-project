@@ -34,13 +34,13 @@ public class MainController {
 	}
 
 	/**
-	 * Suscribe service.
+	 * Subscribe service.
 	 *
 	 * @return the boolean
 	 * @throws Exception the exception
 	 */
 	@PostMapping("/subscribe")
-	public boolean suscribeService(@AuthenticationPrincipal OAuth2User principal) {
+	public boolean subscribeService(@AuthenticationPrincipal OAuth2User principal) {
 
 		try {
 			String image = getLocalImageIdForTest();
