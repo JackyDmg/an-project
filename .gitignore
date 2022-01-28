@@ -25,3 +25,4 @@ an-rest-service/.settings/*
 an-rest-service/target/*
 an-rest-service/.factorypath
 an-rest-service/src/main/resource/application-dev.yml
+*.jpg
