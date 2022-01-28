@@ -11,6 +11,6 @@ import lombok.Data;
 public class CheckReportSummary {
 
 	/** The check. */
-	private List<SingleVerificationDto> check;
+	private List<SingleVerification> check;
 
 }

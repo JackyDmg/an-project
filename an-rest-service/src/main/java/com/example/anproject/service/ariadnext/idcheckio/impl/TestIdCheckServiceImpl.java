@@ -6,11 +6,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
-import com.example.anproject.service.ariadnext.exception.AccessDeniedException;
-import com.example.anproject.service.ariadnext.exception.BadRequestException;
-import com.example.anproject.service.ariadnext.exception.GenericException;
-import com.example.anproject.service.ariadnext.exception.InternalErrorException;
-import com.example.anproject.service.ariadnext.exception.NoAuthenticationFoundException;
 import com.example.anproject.service.ariadnext.idcheckio.AriadNextConstant;
 import com.example.anproject.service.ariadnext.idcheckio.IdCheckService;
 import com.example.anproject.service.ariadnext.idcheckio.client.TestIdCheckIoClient;
@@ -18,13 +13,20 @@ import com.example.anproject.service.ariadnext.idcheckio.dto.AnalysisResult;
 import com.example.anproject.service.ariadnext.idcheckio.dto.ImageAnalysis;
 import com.example.anproject.service.ariadnext.idcheckio.dto.UserResponse;
 import com.example.anproject.service.ariadnext.idcheckio.mapper.IdCheckMapper;
+import com.example.anproject.service.exception.AccessDeniedException;
+import com.example.anproject.service.exception.BadRequestException;
+import com.example.anproject.service.exception.GenericException;
+import com.example.anproject.service.exception.InternalErrorException;
+import com.example.anproject.service.exception.NoAuthenticationFoundException;
 import com.example.anproject.service.user.bo.UserId;
 
 import feign.FeignException;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Qualifier("testIdCheckService")
 @ConditionalOnProperty(name = "ariadnext.idcheckio.client.plateform", havingValue = AriadNextConstant.PLATEFORM_TEST)
+@Slf4j
 public class TestIdCheckServiceImpl implements IdCheckService {
 
 	/** The id check io client. */
@@ -107,6 +109,15 @@ public class TestIdCheckServiceImpl implements IdCheckService {
 	 */
 	private boolean isIdValid(AnalysisResult analysis) {
 		// TODO Analyse CheckReportSummary content to check if the ID is valid
+
+		analysis.getCheckReportSummary().getCheck().stream().forEach(verif -> {
+			if (!verif.getResult().equals("OK")) {
+				log.warn("Id not valid - cause {}", verif.getResultMsg());
+				throw new BadRequestException(verif.getResultMsg());
+			}
+
+		});
+
 		return true;
 	}
 }

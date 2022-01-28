@@ -28,12 +28,21 @@ public class MainController {
 	 * @throws Exception the exception
 	 */
 	@GetMapping("/suscribe")
-	public Boolean suscribeService() throws Exception {
+	public String suscribeService() {
 
-		String encodedString = getLocalImageIdForTest();
+		try {
+			String encodedString = getLocalImageIdForTest();
+			UserId userId = userService.validateUserId(encodedString);
+			if (userService.validateUserSubscription(userId)) {
+				return "Hi, " + userId.getFirstName() + " " + userId.getLastName()
+						+ ", your subscription has been granted !";
+			}
 
-		UserId userId = userService.validateUserId(encodedString);
-		return userService.validateUserSubscription(userId);
+		} catch (Exception e) {
+			return "Subscription refused because of " + e.getMessage();
+		}
+
+		return "";
 	}
 
 	private String getLocalImageIdForTest() throws IOException {

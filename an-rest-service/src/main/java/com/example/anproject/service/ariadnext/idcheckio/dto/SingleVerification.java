@@ -3,12 +3,13 @@ package com.example.anproject.service.ariadnext.idcheckio.dto;
 import lombok.Data;
 
 /**
- * The single verification dto.
+ * The single verification.
  */
 @Data
-public class SingleVerificationDto {
+public class SingleVerification {
 
 	/** The identifier. */
+	// TODO use Enum
 	private String identifier;
 
 	/** The title msg. */
@@ -18,6 +19,7 @@ public class SingleVerificationDto {
 	private String resultMsg;
 
 	/** The result. */
+	// TODO use Enum
 	private String result;
 
 }

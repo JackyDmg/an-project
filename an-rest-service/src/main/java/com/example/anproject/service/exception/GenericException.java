@@ -1,4 +1,4 @@
-package com.example.anproject.service.ariadnext.exception;
+package com.example.anproject.service.exception;
 
 import org.springframework.core.NestedRuntimeException;
 
