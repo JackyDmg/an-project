@@ -5,8 +5,9 @@ spring :
 ariadnext:
   idcheckio:
     client:
-      username : 
-      password : 
+      username : # To be define in application-'profil'.yml
+      password : # To be define in application-'profil'.yml
+      plateform : # prod, test or sandbox - To be define in application-'profil'.yml
 
 
 
