@@ -72,11 +72,11 @@ public class TestIdCheckServiceImpl implements IdCheckService {
 	public UserId analyseImage(String image) {
 		try {
 
-			ImageAnalysis imageAnalysisDto = new ImageAnalysis();
-			imageAnalysisDto.setFrontImage(image);
+			ImageAnalysis imageAnalysis = new ImageAnalysis();
+			imageAnalysis.setFrontImage(image);
 
 			// TODO : Manage async mode
-			AnalysisResult analysis = idCheckIoClient.analyseImageSync(imageAnalysisDto);
+			AnalysisResult analysis = idCheckIoClient.analyseImageSync(imageAnalysis);
 
 			UserId userId = userIdMapper.userAnalyseToUserId(analysis);
 			userId.setIdValid(isIdValid(analysis));

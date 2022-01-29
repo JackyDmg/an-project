@@ -74,11 +74,11 @@ public class SandBoxIdCheckServiceImpl implements IdCheckService {
 	public UserId analyseImage(String image) {
 		try {
 
-			ImageAnalysis imageAnalysisDto = new ImageAnalysis();
-			imageAnalysisDto.setFrontImage(getDemoImageFromSandbox());
+			ImageAnalysis imageAnalysis = new ImageAnalysis();
+			imageAnalysis.setFrontImage(getDemoImageFromSandbox());
 
 			// TODO : Manage async mode
-			AnalysisResult analysis = idCheckIoClient.analyseImageSync(imageAnalysisDto);
+			AnalysisResult analysis = idCheckIoClient.analyseImageSync(imageAnalysis);
 
 			UserId userId = userIdMapper.userAnalyseToUserId(analysis);
 			userId.setIdValid(isIdValid(analysis));
