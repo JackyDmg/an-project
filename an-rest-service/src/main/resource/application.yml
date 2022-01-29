@@ -1,6 +1,13 @@
 spring :
   application :
     name : an-rest-service
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: # To be define in application-'profil'.yml
+            clientSecret: # To be define in application-'profil'.yml
 
 ariadnext:
   idcheckio:
