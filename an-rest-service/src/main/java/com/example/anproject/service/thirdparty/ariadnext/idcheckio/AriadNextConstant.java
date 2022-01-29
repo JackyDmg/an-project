@@ -1,4 +1,4 @@
-package com.example.anproject.service.ariadnext.idcheckio;
+package com.example.anproject.service.thirdparty.ariadnext.idcheckio;
 
 /**
  * The Class AriadNextConstant.

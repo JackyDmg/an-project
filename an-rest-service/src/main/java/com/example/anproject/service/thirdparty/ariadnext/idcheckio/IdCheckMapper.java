@@ -1,13 +1,13 @@
-package com.example.anproject.service.ariadnext.idcheckio.mapper;
+package com.example.anproject.service.thirdparty.ariadnext.idcheckio;
 
 import java.time.LocalDate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.example.anproject.service.ariadnext.idcheckio.dto.AnalysisResult;
-import com.example.anproject.service.ariadnext.idcheckio.dto.Date;
-import com.example.anproject.service.ariadnext.idcheckio.dto.HolderDetail;
+import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.AnalysisResult;
+import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.Date;
+import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.HolderDetail;
 import com.example.anproject.service.user.bo.UserId;
 
 /**

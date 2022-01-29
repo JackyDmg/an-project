@@ -1,4 +1,4 @@
-package com.example.anproject.service.ariadnext.idcheckio.dto;
+package com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto;
 
 import java.util.List;
 

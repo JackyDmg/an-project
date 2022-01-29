@@ -1,4 +1,4 @@
-package com.example.anproject.service.ariadnext.idcheckio.client;
+package com.example.anproject.service.thirdparty.ariadnext.idcheckio.client;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

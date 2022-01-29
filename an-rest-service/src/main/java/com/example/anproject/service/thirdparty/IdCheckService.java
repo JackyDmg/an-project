@@ -1,4 +1,4 @@
-package com.example.anproject.service.ariadnext.idcheckio;
+package com.example.anproject.service.thirdparty;
 
 import com.example.anproject.service.user.bo.UserId;
 
@@ -17,10 +17,9 @@ public interface IdCheckService {
 	/**
 	 * Analyse image.
 	 *
-	 * @param asyncMode the async mode
-	 * @param image     the image
+	 * @param image the image
 	 * @return the analysis result dto
 	 */
-	UserId analyseImage(boolean asyncMode, String image);
+	UserId analyseImage(String image);
 
 }
