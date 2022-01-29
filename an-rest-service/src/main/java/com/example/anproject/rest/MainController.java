@@ -42,6 +42,9 @@ public class MainController {
 	@PostMapping("/subscribe")
 	public boolean subscribeService(@AuthenticationPrincipal OAuth2User principal) {
 
+		// TODO modifie l'API pour fournir les élément de sousscritpion (Nom, Prénom,
+		// Date de naissance, Scan de la pièce d'identité)
+
 		try {
 			String image = getLocalImageIdForTest();
 			UserId userId = userService.validateUserId(image);
