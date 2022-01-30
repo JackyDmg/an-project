@@ -12,7 +12,7 @@ import com.example.anproject.service.user.bo.UserId;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * The Class UserServiceImpl.
+ * The UserService implementation.
  */
 @Service
 @Slf4j
@@ -22,34 +22,21 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private IdCheckService idCheckService;
 
-	/**
-	 * Validate user id.
-	 *
-	 * @param image the image
-	 * @return the analysis result
-	 */
 	@Override
 	public UserId validateUserId(String image) {
 
 		Integer credits = idCheckService.getUserRemainingCredits();
 		log.info("Remaining credits : {}", credits);
 		if (credits > 0)
-			return idCheckService.analyseImage(image);
+			return idCheckService.analyseImageId(image);
 
 		throw new NotAllowedException("Not enough crdits !");
 	}
 
-	/**
-	 * Validate user subscription.
-	 *
-	 * @param userName the user name
-	 * @param userId   the user id
-	 * @return true, if successful
-	 */
 	@Override
 	public boolean validateUserSubscription(String userName, UserId userId) {
 
-		if (userId.isIdValid() && idMatchUserName(userName, userId)) {
+		if (userId.isIdValid() && doesIdMatchesUser(userName, userId)) {
 			// TODO compare userId to the authenticated user information to check if it's
 			// match. If it matches :
 			// - Validate the subscription
@@ -61,13 +48,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * Id match user name.
+	 * Check if Id matches user information.
 	 *
 	 * @param userName the user name
 	 * @param userId   the user id
 	 * @return true, if successful
 	 */
-	private boolean idMatchUserName(String userName, UserId userId) {
+	private boolean doesIdMatchesUser(String userName, UserId userId) {
 
 		// Compare userName with userId ( !! userName from social network are not always
 		// the real one !!

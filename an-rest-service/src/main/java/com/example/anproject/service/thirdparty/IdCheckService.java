@@ -15,11 +15,11 @@ public interface IdCheckService {
 	Integer getUserRemainingCredits();
 
 	/**
-	 * Analyse image.
+	 * Analyse a identification image.
 	 *
-	 * @param image the image
-	 * @return the analysis result dto
+	 * @param image the image to analyse
+	 * @return the user id extracted from the ID content
 	 */
-	UserId analyseImage(String image);
+	UserId analyseImageId(String image);
 
 }

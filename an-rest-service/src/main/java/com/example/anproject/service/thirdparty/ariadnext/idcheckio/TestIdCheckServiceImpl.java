@@ -21,24 +21,23 @@ import com.example.anproject.service.user.bo.UserId;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The IdCheckService implementation for Test environment.
+ */
 @Service
 @Qualifier("testIdCheckService")
 @ConditionalOnProperty(name = "ariadnext.idcheckio.client.plateform", havingValue = AriadNextConstant.PLATEFORM_TEST)
 @Slf4j
 public class TestIdCheckServiceImpl implements IdCheckService {
 
-	/** The id check io client. */
+	/** The Test id check io client. */
 	@Autowired
 	private TestIdCheckIoClient idCheckIoClient;
 
+	/** The user id mapper. */
 	@Autowired
 	private IdCheckMapper userIdMapper;
 
-	/**
-	 * Gets the user remaining credits.
-	 *
-	 * @return the user remaining credits
-	 */
 	@Override
 	public Integer getUserRemainingCredits() {
 		try {
@@ -62,14 +61,8 @@ public class TestIdCheckServiceImpl implements IdCheckService {
 		}
 	}
 
-	/**
-	 * Analyse image.
-	 *
-	 * @param image the image
-	 * @return the analysis result
-	 */
 	@Override
-	public UserId analyseImage(String image) {
+	public UserId analyseImageId(String image) {
 		try {
 
 			ImageAnalysis imageAnalysis = new ImageAnalysis();
@@ -100,16 +93,16 @@ public class TestIdCheckServiceImpl implements IdCheckService {
 	}
 
 	/**
-	 * Checks if is id valid.
+	 * Checks if Image content analysis is valid
 	 *
-	 * @return true, if is id valid
+	 * @return true, if the id valid
 	 */
 	private boolean isIdValid(AnalysisResult analysis) {
 		// TODO Analyse CheckReportSummary content to check if the ID is valid
 
 		analysis.getCheckReportSummary().getCheck().stream().forEach(verif -> {
 			if (!verif.getResult().equals("OK")) {
-				log.warn("Id not valid - cause {}", verif.getResultMsg());
+				log.warn("Id is not valid - cause {}", verif.getResultMsg());
 				throw new BadRequestException(verif.getResultMsg());
 			}
 

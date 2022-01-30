@@ -8,7 +8,7 @@ import feign.auth.BasicAuthRequestInterceptor;
 import feign.slf4j.Slf4jLogger;
 
 /**
- * The Class IdCheckIoConfiguration.
+ * The IdCheckIo API Configuration.
  */
 public class IdCheckIoConfiguration {
 

@@ -1,7 +1,7 @@
 package com.example.anproject.service.thirdparty.ariadnext.idcheckio;
 
 /**
- * The Class AriadNextConstant.
+ * The AriadNext Constants.
  */
 public class AriadNextConstant {
 

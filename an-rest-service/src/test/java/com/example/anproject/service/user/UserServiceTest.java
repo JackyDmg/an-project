@@ -42,7 +42,7 @@ public class UserServiceTest {
 		UserId result = new UserId();
 		result.setFirstName("test");
 		result.setIdValid(true);
-		when(idCheckServiceMock.analyseImage(imageToTest)).thenReturn(result);
+		when(idCheckServiceMock.analyseImageId(imageToTest)).thenReturn(result);
 
 		UserId userId = userService.validateUserId(imageToTest);
 
@@ -71,7 +71,7 @@ public class UserServiceTest {
 		UserId result = new UserId();
 		result.setFirstName("test");
 		result.setIdValid(true);
-		when(idCheckServiceMock.analyseImage(imageToTest)).thenThrow(new BadRequestException());
+		when(idCheckServiceMock.analyseImageId(imageToTest)).thenThrow(new BadRequestException());
 
 		UserId userId = userService.validateUserId(imageToTest);
 

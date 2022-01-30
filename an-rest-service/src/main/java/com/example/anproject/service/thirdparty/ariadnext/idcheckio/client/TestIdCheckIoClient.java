@@ -14,7 +14,7 @@ import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.TaskDeta
 import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.UserResponse;
 
 /**
- * The IdCheckIo Client interface
+ * The IdCheckIo Client interface for Test environment.
  */
 @FeignClient(value = "test-idcheckio", url = AriadNextConstant.URL_TEST, configuration = IdCheckIoConfiguration.class)
 public interface TestIdCheckIoClient {
@@ -37,7 +37,7 @@ public interface TestIdCheckIoClient {
 	AnalysisResult analyseImageSync(@RequestBody ImageAnalysis imageAnalysis);
 
 	/**
-	 * Analyze image with asynchronized result.
+	 * Analyze image without synchronized result.
 	 *
 	 * @param imageAnalysis the image analysis
 	 * @return the task detail
@@ -70,5 +70,4 @@ public interface TestIdCheckIoClient {
 			@RequestParam("rectoImageCropped") String rectoImageCropped, //
 			@RequestParam("signatureImageCropped") String signatureImageCropped, //
 			@RequestParam("faceImageCropped") String faceImageCropped);
-
 }

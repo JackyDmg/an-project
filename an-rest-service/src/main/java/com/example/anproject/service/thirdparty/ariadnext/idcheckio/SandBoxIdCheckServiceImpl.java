@@ -23,24 +23,23 @@ import com.example.anproject.service.user.bo.UserId;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The IdCheckService implementation for Test environment.
+ */
 @Service
 @Slf4j
 @Qualifier("sandBoxIdCheckService")
 @ConditionalOnProperty(name = "ariadnext.idcheckio.client.plateform", havingValue = AriadNextConstant.PLATEFORM_SANDBOX)
 public class SandBoxIdCheckServiceImpl implements IdCheckService {
 
-	/** The id check io client. */
+	/** The Sandbox id check io client. */
 	@Autowired
 	private SandBoxIdCheckIoClient idCheckIoClient;
 
+	/** The user id mapper. */
 	@Autowired
 	private IdCheckMapper userIdMapper;
 
-	/**
-	 * Gets the user remaining credits.
-	 *
-	 * @return the user remaining credits
-	 */
 	@Override
 	public Integer getUserRemainingCredits() {
 		try {
@@ -64,14 +63,8 @@ public class SandBoxIdCheckServiceImpl implements IdCheckService {
 		}
 	}
 
-	/**
-	 * Analyse image.
-	 *
-	 * @param image the image
-	 * @return the analysis result
-	 */
 	@Override
-	public UserId analyseImage(String image) {
+	public UserId analyseImageId(String image) {
 		try {
 
 			ImageAnalysis imageAnalysis = new ImageAnalysis();
@@ -129,9 +122,9 @@ public class SandBoxIdCheckServiceImpl implements IdCheckService {
 	}
 
 	/**
-	 * Checks if is id valid.
+	 * Checks if Image content analysis is valid
 	 *
-	 * @return true, if is id valid
+	 * @return true, if the id valid
 	 */
 	private boolean isIdValid(AnalysisResult analysis) {
 		return true;

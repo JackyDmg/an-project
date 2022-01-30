@@ -6,14 +6,19 @@ import org.springframework.context.annotation.Configuration;
 import lombok.Data;
 
 /**
- * The Class IdCheckIoProperties.
+ * The IdCheckIo Properties.
  */
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "ariadnext.idcheckio.client")
 public class IdCheckIoProperties {
 
+	/** The username. */
 	private String username;
+
+	/** The password. */
 	private String password;
+
+	/** The plateform. */
 	private String plateform;
 }

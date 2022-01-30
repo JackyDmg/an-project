@@ -112,7 +112,7 @@ public class TestIdCheckServiceTest {
 
 		when(idCheckIoClientMock.analyseImageSync(Mockito.any(ImageAnalysis.class))).thenReturn(analysis);
 
-		UserId result = idCheckService.analyseImage("image");
+		UserId result = idCheckService.analyseImageId("image");
 
 		assertNotNull(result);
 		assertEquals("John", result.getFirstName());
@@ -136,7 +136,7 @@ public class TestIdCheckServiceTest {
 
 		when(idCheckIoClientMock.analyseImageSync(Mockito.any(ImageAnalysis.class))).thenReturn(analysis);
 
-		UserId result = idCheckService.analyseImage("image");
+		UserId result = idCheckService.analyseImageId("image");
 
 		assertNull(result);
 	}
@@ -151,7 +151,7 @@ public class TestIdCheckServiceTest {
 		when(idCheckIoClientMock.analyseImageSync(Mockito.any(ImageAnalysis.class)))
 				.thenThrow(new FeignServerException(HttpStatus.BAD_REQUEST.value(), "", req, null, headers));
 
-		UserId result = idCheckService.analyseImage("image");
+		UserId result = idCheckService.analyseImageId("image");
 
 		assertNull(result);
 	}

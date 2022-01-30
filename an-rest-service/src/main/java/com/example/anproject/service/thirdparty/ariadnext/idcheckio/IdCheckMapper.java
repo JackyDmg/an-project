@@ -11,13 +11,13 @@ import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.HolderDe
 import com.example.anproject.service.user.bo.UserId;
 
 /**
- * The Class IdCheckMapper.
+ * The IdCheck Mapper.
  */
 @Component
 public class IdCheckMapper {
 
 	/**
-	 * User analyse to user id.
+	 * Map User analyse to user id.
 	 *
 	 * @param analysis the analysis
 	 * @return the user id

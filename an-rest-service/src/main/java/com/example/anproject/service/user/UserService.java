@@ -8,7 +8,7 @@ import com.example.anproject.service.user.bo.UserId;
 public interface UserService {
 
 	/**
-	 * Validate user id.
+	 * Validate a user image ID.
 	 *
 	 * @param image the image
 	 * @return the UserId result
@@ -16,7 +16,7 @@ public interface UserService {
 	UserId validateUserId(String image);
 
 	/**
-	 * Validate user subscription.
+	 * Validate a user subscription.
 	 *
 	 * @param userName the user name
 	 * @param userId   the user id

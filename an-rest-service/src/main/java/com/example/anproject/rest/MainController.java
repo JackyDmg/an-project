@@ -19,12 +19,15 @@ import com.example.anproject.service.user.bo.UserId;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Main Controller.
+ */
 @RestController
 @RequestMapping("/")
 @Slf4j
 public class MainController {
 
-	/** The idCheckIo service. */
+	/** The user service. */
 	@Autowired
 	private UserService userService;
 
@@ -42,7 +45,7 @@ public class MainController {
 	@PostMapping("/subscribe")
 	public boolean subscribeService(@AuthenticationPrincipal OAuth2User principal) {
 
-		// TODO modifie l'API pour fournir les élément de sousscritpion (Nom, Prénom,
+		// TODO modifier l'API pour fournir les éléments de sousscritpion (Nom, Prénom,
 		// Date de naissance, Scan de la pièce d'identité)
 
 		try {
@@ -65,6 +68,12 @@ public class MainController {
 		return false;
 	}
 
+	/**
+	 * (For Demo) get local image to check
+	 *
+	 * @return the local image id for test
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private String getLocalImageIdForTest() throws IOException {
 		// Get image from local resource
 		ClassLoader classLoader = getClass().getClassLoader();

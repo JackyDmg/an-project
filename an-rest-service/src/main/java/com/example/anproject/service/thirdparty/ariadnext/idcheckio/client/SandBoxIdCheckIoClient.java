@@ -15,7 +15,7 @@ import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.TaskDeta
 import com.example.anproject.service.thirdparty.ariadnext.idcheckio.dto.UserResponse;
 
 /**
- * The IdCheckIo Client interface
+ * The IdCheckIo Client interface for SandBox environment.
  */
 @FeignClient(value = "sandbox-idcheckio", url = AriadNextConstant.URL_SANDBOX, configuration = IdCheckIoConfiguration.class)
 public interface SandBoxIdCheckIoClient {
@@ -61,7 +61,7 @@ public interface SandBoxIdCheckIoClient {
 	AnalysisResult analyseImageSync(@RequestBody ImageAnalysis imageAnalysis);
 
 	/**
-	 * Analyze image with asynchronized result.
+	 * Analyze image without synchronized result.
 	 *
 	 * @param imageAnalysis the image analysis
 	 * @return the task detail
